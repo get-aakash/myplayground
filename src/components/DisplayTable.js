@@ -20,7 +20,7 @@ const DisplayTable = () => {
           <td>1</td>
           <td>Your Todo Here...</td>
           <td>4/10/2024</td>
-          <td><Link to='/update/:id'><Button><i class="fa-solid fa-pen-to-square"></i></Button></Link><Button variant="danger"><i class="fa-solid fa-trash"></i></Button></td>
+          <td><Link to='/update/:id'><Button><i className="fa-solid fa-pen-to-square"></i></Button></Link><Button variant="danger"><i className="fa-solid fa-trash"></i></Button></td>
         </tr>
         
         
