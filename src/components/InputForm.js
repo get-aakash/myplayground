@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import CustomInput from './CustomInput'
+import DisplayTable from './DisplayTable'
 
 const InputForm = () => {
     const inputs = [
@@ -16,20 +17,23 @@ const InputForm = () => {
             required: true
         }
     ]
-    const [formData, setFormData] = useState([])
+    const [formData, setFormData] = useState({})
+    const [todos, setTodos] = useState([])
 
     const handleOnChange = (e)=>{
        const {name, value} = e.target
-       setFormData({...formData,[name]: value})
+       setFormData({...formData, [name]: value})
        
     }
 
     const handleOnSubmit = (e)=>{
-        e.preventDefault()
-        console.log(formData)
+        e.preventDefault()  
+        setTodos([...todos, formData])
     }
+    console.log(todos)
     return (
-        <Form onSubmit={handleOnSubmit}>
+        <div>
+            <Form onSubmit={handleOnSubmit}>
             <Col>
                 <Row className='mt-5'>
                         {inputs.map((item,i)=><CustomInput key={i} {...item} onChange={handleOnChange}/>)}
@@ -46,6 +50,14 @@ const InputForm = () => {
                 
             
         </Form>
+        <div className='p-2 text-center'>
+            
+                    <DisplayTable todos={todos} />
+                </div>
+
+        </div>
+        
+
     )
 }
 

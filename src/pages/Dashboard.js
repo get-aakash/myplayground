@@ -12,9 +12,7 @@ const Dashboard = () => {
                 </div>
                 
                 <hr className='py-1 bg-dark' />
-                <div className='p-2 text-center'>
-                    <DisplayTable />
-                </div>
+                
 
             </div>
 
