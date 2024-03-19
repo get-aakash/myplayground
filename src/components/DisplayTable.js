@@ -2,7 +2,8 @@ import React from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const DisplayTable = ({todos}) => {
+const DisplayTable = ({todos, handleOnDelete}) => {
+  
   return (
     <div className=''>
         <h3 className='text-center py-3'>Your list of Todos are here!!!</h3>
@@ -17,11 +18,11 @@ const DisplayTable = ({todos}) => {
       </thead>
       <tbody>
         {todos.map((item,i)=>(
-           <tr>
+           <tr key={i}>
            <td>{i+1}</td>
            <td>{item.todo}</td>
            <td>{item.date}</td>
-           <td><Link to='/update/:id'><Button><i className="fa-solid fa-pen-to-square"></i></Button></Link><Button variant="danger"><i className="fa-solid fa-trash"></i></Button></td>
+           <td><Link to='/update/:id'><Button variant='success' title='update'><i className="fa-solid fa-pen-to-square"></i></Button></Link><Button variant="danger" onClick={()=>handleOnDelete(i)} title='Delete' ><i className="fa-solid fa-trash"></i></Button></td>
          </tr>
         ))}
        

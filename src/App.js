@@ -4,7 +4,7 @@ import Dashboard from './pages/Dashboard';
 import UpdateToDo from './components/UpdateToDo';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-
+import { ToastContainer, toast } from 'react-toastify';
 function App() {
   return (
     <div className="App">
@@ -14,7 +14,7 @@ function App() {
         <Route path='signin' element={<SignIn />} />
         <Route path='signup' element={<SignUp />} />
       </Routes>
-      
+      <ToastContainer />
     </div>
   );
 }

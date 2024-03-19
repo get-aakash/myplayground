@@ -4,6 +4,7 @@ import InputForm from '../components/InputForm'
 import DisplayTable from '../components/DisplayTable'
 
 const Dashboard = () => {
+    
     return (
         <DefaultLayout>
             <div className="">
@@ -11,7 +12,7 @@ const Dashboard = () => {
                 <InputForm />
                 </div>
                 
-                <hr className='py-1 bg-dark' />
+                
                 
 
             </div>

@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import CustomInput from './CustomInput'
 import DisplayTable from './DisplayTable'
+import { toast } from 'react-toastify'
 
+let globalId = 0
 const InputForm = () => {
     const inputs = [
         {
@@ -17,9 +19,19 @@ const InputForm = () => {
             required: true
         }
     ]
+    
     const [formData, setFormData] = useState({})
     const [todos, setTodos] = useState([])
 
+
+    const handleOnDelete = (id)=>{
+        if(window.confirm("Are you sure to Delete this ToDO")){
+            const data = todos.filter((item,i)=>i!==id)
+        setTodos(data)
+        toast.success("The ToDo has been deleted")
+        }
+        
+    }
     const handleOnChange = (e)=>{
        const {name, value} = e.target
        setFormData({...formData, [name]: value})
@@ -28,7 +40,11 @@ const InputForm = () => {
 
     const handleOnSubmit = (e)=>{
         e.preventDefault()  
+        globalId = globalId + 1
         setTodos([...todos, formData])
+        toast.success("The ToDO has been created")
+        
+        
     }
     console.log(todos)
     return (
@@ -50,9 +66,10 @@ const InputForm = () => {
                 
             
         </Form>
+        <hr className='py-1 bg-dark' />
         <div className='p-2 text-center'>
             
-                    <DisplayTable todos={todos} />
+                    <DisplayTable todos={todos} handleOnDelete={handleOnDelete} />
                 </div>
 
         </div>
