@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const DisplayTable = ({todos, handleOnDelete}) => {
+const DisplayTable = ({todos, handleOnDelete, handleUpdate}) => {
   
   return (
     <div className=''>
@@ -22,7 +22,7 @@ const DisplayTable = ({todos, handleOnDelete}) => {
            <td>{i+1}</td>
            <td>{item.todo}</td>
            <td>{item.date}</td>
-           <td><Link to='/update/:id'><Button variant='success' title='update'><i className="fa-solid fa-pen-to-square"></i></Button></Link><Button variant="danger" onClick={()=>handleOnDelete(i)} title='Delete' ><i className="fa-solid fa-trash"></i></Button></td>
+           <td> <Button onClick={()=>handleUpdate(item)} variant='success' title='update'><i className="fa-solid fa-pen-to-square"></i></Button><Button variant="danger" onClick={()=>handleOnDelete(i)} title='Delete' ><i className="fa-solid fa-trash"></i></Button></td>
          </tr>
         ))}
        

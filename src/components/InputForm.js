@@ -4,24 +4,17 @@ import CustomInput from './CustomInput'
 import DisplayTable from './DisplayTable'
 import { toast } from 'react-toastify'
 
-let globalId = 0
+
+const initialState = {
+    todo:"",
+    date: ""
+}
 const InputForm = () => {
-    const inputs = [
-        {
-            name:'todo',
-            type:'text',
-            placeholder: "Enter Your ToDo here ...",
-            required: true
-        },
-        {
-            name:'date',
-            type: 'date',
-            required: true
-        }
-    ]
+    
     
     const [formData, setFormData] = useState({})
     const [todos, setTodos] = useState([])
+    const [selectedItem, setSelectedItem] = useState(null)
 
 
     const handleOnDelete = (id)=>{
@@ -32,6 +25,30 @@ const InputForm = () => {
         }
         
     }
+    const handleUpdate = (item)=>{
+        setSelectedItem(item)
+        
+        setFormData({
+            todo: item.todo,
+            date: item.date,
+            id: item.id
+            
+        })
+        
+
+     }
+     const updateData = (e)=>{
+        e.preventDefault()
+        console.log(formData)
+        console.log(todos)
+        const updatedList = todos.map(item =>
+            item.id === formData.id ? { ...item, todo: formData.todo, date: formData.date } : item
+          );
+          setFormData(initialState)
+          setTodos(updatedList)
+          setSelectedItem(null)
+     }
+   
     const handleOnChange = (e)=>{
        const {name, value} = e.target
        setFormData({...formData, [name]: value})
@@ -39,17 +56,51 @@ const InputForm = () => {
     }
 
     const handleOnSubmit = (e)=>{
-        e.preventDefault()  
-        globalId = globalId + 1
-        setTodos([...todos, formData])
+        e.preventDefault() 
+       
+        setFormData(initialState)
+        const obj = { ...formData, createdAt: Date.now(), id: Math.random()}
+        setTodos([...todos,obj])
+        console.log(todos)
         toast.success("The ToDO has been created")
         
         
     }
+    const inputs = [
+        {
+            value: formData.todo,
+            name:'todo',
+            type:'text',
+            placeholder: "Enter Your ToDo here ...",
+            required: true
+        },
+        {
+            value: formData.date,
+            name:'date',
+            type: 'date',
+            required: true
+        }
+    ]
     console.log(todos)
     return (
         <div>
-            <Form onSubmit={handleOnSubmit}>
+            {selectedItem?(<Form onSubmit={updateData}  >
+            <Col>
+                <Row className='mt-5'>
+                        {inputs.map((item,i)=><CustomInput key={i} {...item} onChange={handleOnChange}/>)}
+
+                </Row>
+                
+                <Row className='mt-2' >
+                <Button variant="secondary" type="submit">Update</Button>
+                </Row>
+            </Col>
+
+           
+            
+                
+            
+        </Form>):(<Form onSubmit={handleOnSubmit}>
             <Col>
                 <Row className='mt-5'>
                         {inputs.map((item,i)=><CustomInput key={i} {...item} onChange={handleOnChange}/>)}
@@ -65,11 +116,12 @@ const InputForm = () => {
             
                 
             
-        </Form>
+        </Form>) }
+            
         <hr className='py-1 bg-dark' />
         <div className='p-2 text-center'>
             
-                    <DisplayTable todos={todos} handleOnDelete={handleOnDelete} />
+                    <DisplayTable todos={todos} handleUpdate={handleUpdate} handleOnDelete={handleOnDelete} />
                 </div>
 
         </div>
