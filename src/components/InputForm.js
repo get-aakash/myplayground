@@ -34,6 +34,9 @@ const InputForm = () => {
             id: item.id
             
         })
+        if(item.id){
+            toast.success("Please Update your ToDO")
+        }
         
 
      }
@@ -47,6 +50,7 @@ const InputForm = () => {
           setFormData(initialState)
           setTodos(updatedList)
           setSelectedItem(null)
+          toast.success("Your ToDO has been updated!!!")
      }
    
     const handleOnChange = (e)=>{

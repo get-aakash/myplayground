@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <Navbar expand="md" className="text-light bg-secondary">
       <Container>
-        <Navbar.Brand href="#home">MyPlayground</Navbar.Brand>
+        <Navbar.Brand href="#home">ToDO</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto gap-4 fs-4">
